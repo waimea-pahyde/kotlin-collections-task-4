@@ -131,10 +131,10 @@ fun main() {
     //-------------------------------------------------
     println("Trying an invalid violent monkey placement (no room)...")
 
-    val vinceCage = placeMonkey(cages, "Vince")
+    val vinceCage = placeViolentMonkey(cages, "Vince")
     showMonkeyCages(cages)
     check(vinceCage == -1)
-    check(cages == listOf("Tim", EMPTY, "Pam", "Jim", EMPTY, "Kelly", EMPTY, "Wanda"))
+    check(cages == listOf("!Tim", EMPTY, "Pam", "Jim", EMPTY, "!Kelly", EMPTY, "!Wanda"))
 
     println()
 
