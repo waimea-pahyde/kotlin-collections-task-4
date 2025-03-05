@@ -150,7 +150,7 @@ fun main() {
     //-------------------------------------------------
     println("Trying to place normal monkey...")
 
-    val terryCage = placeViolentMonkey(cages, "Terry")
+    val terryCage = placeMonkey(cages, "Terry")
     showMonkeyCages(cages)
     check(terryCage == 6)
     check(cages == listOf("!Tim", EMPTY, "Pam", "Jim", EMPTY, "Terry", EMPTY, "!Wanda"))
@@ -160,7 +160,7 @@ fun main() {
     //-------------------------------------------------
     println("Trying to invalidly place normal monkey (no free cages not next to violent ones)...")
 
-    val garyCage = placeViolentMonkey(cages, "Gary")
+    val garyCage = placeMonkey(cages, "Gary")
     showMonkeyCages(cages)
     check(garyCage == -1)
     check(cages == listOf("!Tim", EMPTY, "Pam", "Jim", EMPTY, "Terry", EMPTY, "!Wanda"))
