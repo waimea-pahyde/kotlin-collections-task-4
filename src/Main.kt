@@ -114,17 +114,17 @@ fun main() {
     val timCage = placeViolentMonkey(cages, "Tim")
     showMonkeyCages(cages)
     check(timCage == 1)
-    check(cages == listOf("Tim", EMPTY, "Pam", "Jim", EMPTY, EMPTY, EMPTY, EMPTY))
+    check(cages == listOf("!Tim", EMPTY, "Pam", "Jim", EMPTY, EMPTY, EMPTY, EMPTY))
 
     val kellyCage = placeViolentMonkey(cages, "Kelly")
     showMonkeyCages(cages)
     check(kellyCage == 6)
-    check(cages == listOf("Tim", EMPTY, "Pam", "Jim", EMPTY, "Kelly", EMPTY, EMPTY))
+    check(cages == listOf("!Tim", EMPTY, "Pam", "Jim", EMPTY, "!Kelly", EMPTY, EMPTY))
 
     val wandaCage = placeViolentMonkey(cages, "Wanda")
     showMonkeyCages(cages)
     check(wandaCage == 8)
-    check(cages == listOf("Tim", EMPTY, "Pam", "Jim", EMPTY, "Kelly", EMPTY, "Wanda"))
+    check(cages == listOf("!Tim", EMPTY, "Pam", "Jim", EMPTY, "!Kelly", EMPTY, "!Wanda"))
 
     println()
 
@@ -159,7 +159,10 @@ fun placeMonkey(cageList: MutableList<String>, name: String): Int {
  *
  * Places a monkey in the first free, empty cage (starting from 1)
  * which has empty cages either side, or is an end cage next to an
- * empty cage
+ * empty cage.
+ *
+ * Violent monkeys have an '!' added to start of their name
+ *
  * - If the monkey is placed successfully, returns the cage number
  * - If all cages are occupied, returns -1
  */
@@ -169,10 +172,6 @@ fun placeViolentMonkey(cageList: MutableList<String>, name: String): Int {
     // YOUR CODE HERE
     return -1
 }
-
-
-
-
 
 
 /**
@@ -224,7 +223,7 @@ fun showMonkeyCages(cageList: List<String>) {
     val divider = "+--------".repeat(cageList.size) + "+"
 
     println(divider)
-    for (i in 0 ..< cageList.size) print("| Cage ${i+1} ")
+    for (i in 0..<cageList.size) print("| Cage ${i + 1} ")
     println("|")
 
     println(divider)
