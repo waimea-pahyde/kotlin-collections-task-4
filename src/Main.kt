@@ -67,8 +67,74 @@ fun main() {
     val jimCage = placeMonkey(cages, "Jim")
     showMonkeyCages(cages)
     check(jimCage == 4)
-
     check(cages == listOf("Kevin", "Nigel", "Pam", "Jim", EMPTY, EMPTY, EMPTY, "Sally"))
+
+    val kimCage = placeMonkey(cages, "Kim")
+    showMonkeyCages(cages)
+    check(kimCage == 5)
+    check(cages == listOf("Kevin", "Nigel", "Pam", "Jim", "Kim", EMPTY, EMPTY, "Sally"))
+
+    val daveCage = placeMonkey(cages, "Dave")
+    showMonkeyCages(cages)
+    check(daveCage == 6)
+    check(cages == listOf("Kevin", "Nigel", "Pam", "Jim", "Kim", "Dave", EMPTY, "Sally"))
+
+    val samCage = placeMonkey(cages, "Sam")
+    showMonkeyCages(cages)
+    check(samCage == 7)
+    check(cages == listOf("Kevin", "Nigel", "Pam", "Jim", "Kim", "Dave", "Sam", "Sally"))
+
+    //-------------------------------------------------
+    println("Trying an invalid automatic placement (no room)...")
+
+    val leoCage = placeMonkey(cages, "Leo")
+    showMonkeyCages(cages)
+    check(leoCage == -1)
+    check(cages == listOf("Kevin", "Nigel", "Pam", "Jim", "Kim", "Dave", "Sam", "Sally"))
+
+    println()
+
+    //-------------------------------------------------
+    println("Making some room for violent monkeys...")
+
+    clearCage(cages, 1)
+    clearCage(cages, 2)
+    clearCage(cages, 5)
+    clearCage(cages, 6)
+    clearCage(cages, 7)
+    clearCage(cages, 8)
+    showMonkeyCages(cages)
+    check(cages == listOf(EMPTY, EMPTY, "Pam", "Jim", EMPTY, EMPTY, EMPTY, EMPTY))
+
+    println()
+
+    //-------------------------------------------------
+    println("Placing some violent monkeys...")
+
+    val timCage = placeViolentMonkey(cages, "Tim")
+    showMonkeyCages(cages)
+    check(timCage == 1)
+    check(cages == listOf("Tim", EMPTY, "Pam", "Jim", EMPTY, EMPTY, EMPTY, EMPTY))
+
+    val kellyCage = placeViolentMonkey(cages, "Kelly")
+    showMonkeyCages(cages)
+    check(kellyCage == 6)
+    check(cages == listOf("Tim", EMPTY, "Pam", "Jim", EMPTY, "Kelly", EMPTY, EMPTY))
+
+    val wandaCage = placeViolentMonkey(cages, "Wanda")
+    showMonkeyCages(cages)
+    check(wandaCage == 8)
+    check(cages == listOf("Tim", EMPTY, "Pam", "Jim", EMPTY, "Kelly", EMPTY, "Wanda"))
+
+    println()
+
+    //-------------------------------------------------
+    println("Trying an invalid violent monkey placement (no room)...")
+
+    val vinceCage = placeMonkey(cages, "Vince")
+    showMonkeyCages(cages)
+    check(vinceCage == -1)
+    check(cages == listOf("Tim", EMPTY, "Pam", "Jim", EMPTY, "Kelly", EMPTY, "Wanda"))
 
     println()
 
@@ -90,24 +156,19 @@ fun placeMonkey(cageList: MutableList<String>, name: String): Int {
 
 /**
  * Violent monkeys cannot be placed next to other monkeys!
+ *
  * Places a monkey in the first free, empty cage (starting from 1)
- * that has empty cages either side (or is an end cage)
+ * which has empty cages either side, or is an end cage next to an
+ * empty cage
  * - If the monkey is placed successfully, returns the cage number
  * - If all cages are occupied, returns -1
  */
 fun placeViolentMonkey(cageList: MutableList<String>, name: String): Int {
-    println("+++ Putting $name into a cage")
+    println("+++ Putting $name (VIOLENT!) into a cage")
 
     // YOUR CODE HERE
     return -1
 }
-
-
-
-
-
-
-
 
 
 
@@ -174,3 +235,13 @@ fun showMonkeyCages(cageList: List<String>) {
 }
 
 
+/**
+ * Make a given cage empty (if a monkey was in it, it's gone now!)
+ */
+fun clearCage(cageList: MutableList<String>, cageNum: Int) {
+    // Check for invalid cage num
+    if (cageNum !in 1..cageList.size) return
+    // Ok to clear the cage
+    println("--- Clearing cage $cageNum")
+    cageList[cageNum - 1] = EMPTY
+}
