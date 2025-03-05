@@ -138,6 +138,35 @@ fun main() {
 
     println()
 
+    //-------------------------------------------------
+    println("Making some room for normal monkeys...")
+
+    clearCage(cages, 6)
+    showMonkeyCages(cages)
+    check(cages == listOf("!Tim", EMPTY, "Pam", "Jim", EMPTY, EMPTY, EMPTY, "!Wanda"))
+
+    println()
+
+    //-------------------------------------------------
+    println("Trying to place normal monkey...")
+
+    val terryCage = placeViolentMonkey(cages, "Terry")
+    showMonkeyCages(cages)
+    check(terryCage == 6)
+    check(cages == listOf("!Tim", EMPTY, "Pam", "Jim", EMPTY, "Terry", EMPTY, "!Wanda"))
+
+    println()
+
+    //-------------------------------------------------
+    println("Trying to invalidly place normal monkey (no free cages not next to violent ones)...")
+
+    val garyCage = placeViolentMonkey(cages, "Gary")
+    showMonkeyCages(cages)
+    check(garyCage == -1)
+    check(cages == listOf("!Tim", EMPTY, "Pam", "Jim", EMPTY, "Terry", EMPTY, "!Wanda"))
+
+    println()
+
 }
 
 
