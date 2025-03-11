@@ -181,11 +181,22 @@ fun main() {
  */
 fun placeMonkey(cageList: MutableList<String>, name: String): Int {
     println("+++ Putting $name into a cage")
+    var monkeyCount = 0
+    for (cage in cageList) {
+        if (name != EMPTY) {
+            monkeyCount++
+        }
+    }
+    if (monkeyCount == 0) {
+        return -1
+    }
+    for (cage in cageList.withIndex()) {
+        if (name == EMPTY) {
+            
+        }
+    }
 
-    // YOUR CODE HERE
-    return -1
 }
-
 
 /**
  * Violent monkeys cannot be placed next to other monkeys!
