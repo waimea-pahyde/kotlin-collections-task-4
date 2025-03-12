@@ -181,20 +181,23 @@ fun main() {
  */
 fun placeMonkey(cageList: MutableList<String>, name: String): Int {
     println("+++ Putting $name into a cage")
-    var monkeyCount = 0
-    for (cage in cageList) {
-        if (name != EMPTY) {
-            monkeyCount++
-        }
-    }
-    if (monkeyCount == 0) {
-        return -1
-    }
+//    for (cage in cageList.withIndex()) {
+//        if (cage.value == EMPTY) {
+//            cageList.removeAt(cage.index)
+//            cageList.add(cage.index , name)
+//            return cage.index+1
+//        }
     for (cage in cageList.withIndex()) {
-        if (name == EMPTY) {
-            
-        }
+        if (cage.value != EMPTY) continue
+        if (cage.index!=0 && cageList[cage.index-1].contains("!")) continue
+        if (cage.index+1 < NUMCAGES && cageList[cage.index+1].contains("!")) continue
+        placeMonkeyInCage(cageList , cage.index+1 , "$name")
+        return cage.index+1
+
+
+
     }
+    return -1
 
 }
 
@@ -212,8 +215,17 @@ fun placeMonkey(cageList: MutableList<String>, name: String): Int {
  */
 fun placeViolentMonkey(cageList: MutableList<String>, name: String): Int {
     println("+++ Putting $name (VIOLENT!) into a cage")
+    for (cage in cageList.withIndex()) {
+        if (cage.value != EMPTY) continue
+        if (cage.index!=0 && cageList[cage.index-1] != EMPTY) continue
+        if (cage.index+1 < NUMCAGES && cageList[cage.index+1] != EMPTY) continue
+        placeMonkeyInCage(cageList , cage.index+1 , "!$name")
+        return cage.index+1
 
-    // YOUR CODE HERE
+
+
+    }
+
     return -1
 }
 
